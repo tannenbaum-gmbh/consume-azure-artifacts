@@ -1,0 +1,60 @@
+name: Download Azure Artifacts
+
+on: [workflow_dispatch]
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - run: |
+        mkdir artifacts
+        az artifacts universal download
+        --organization https://dev.azure.com/MngEnvMCAP282378/
+        --feed AITeam@CustomerFacing
+        --name cmakesample
+        --version '1.0.*'
+        --path artifacts/.
+
+        tree artifacts
+      name: 'Download Azure Artifacts View CustomerFacing - Allowed'
+
+    - run: |
+        mkdir artifacts
+        az artifacts universal download
+        --organization https://dev.azure.com/MngEnvMCAP282378/
+        --feed AITeam@Release
+        --name cmakesample
+        --version '1.0.*'
+        --path artifacts/.
+
+        tree artifacts
+      continue-on-error: true
+      name: 'Download Azure Artifacts View Release - Not Allowed'
+
+    - run: |
+        mkdir artifacts
+        az artifacts universal download
+        --organization https://dev.azure.com/MngEnvMCAP282378/
+        --feed AITeam
+        --name cmakesample
+        --version '1.0.*'
+        --path artifacts/.
+
+        tree artifacts
+    continue-on-error: true
+    name: 'Download Azure Artifacts Default View - Not Allowed'
