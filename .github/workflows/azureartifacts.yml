@@ -57,5 +57,5 @@ jobs:
         --path artifacts/.
 
         tree artifacts
-    continue-on-error: true
-    name: 'Download Azure Artifacts Default View - Not Allowed'
+      continue-on-error: true
+      name: 'Download Azure Artifacts Default View - Not Allowed'
