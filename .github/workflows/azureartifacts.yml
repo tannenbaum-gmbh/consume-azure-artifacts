@@ -23,11 +23,11 @@ jobs:
 
     - run: |
         mkdir artifacts
-        az artifacts universal download
-        --organization https://dev.azure.com/MngEnvMCAP282378/
-        --feed 'AITeam@CustomerFacing'
-        --name cmakesample
-        --version '1.0.*'
+        az artifacts universal download \
+        --organization https://dev.azure.com/MngEnvMCAP282378/ \
+        --feed 'AITeam@CustomerFacing' \
+        --name cmakesample \
+        --version '1.0.*' \
         --path artifacts/.
 
         tree artifacts
@@ -35,11 +35,11 @@ jobs:
 
     - run: |
         mkdir artifacts
-        az artifacts universal download
-        --organization https://dev.azure.com/MngEnvMCAP282378/
-        --feed 'AITeam@Release'
-        --name cmakesample
-        --version '1.0.*'
+        az artifacts universal download \
+        --organization https://dev.azure.com/MngEnvMCAP282378/ \
+        --feed 'AITeam@Release' \
+        --name cmakesample \
+        --version '1.0.*' \
         --path artifacts/.
 
         tree artifacts
@@ -48,11 +48,11 @@ jobs:
 
     - run: |
         mkdir artifacts
-        az artifacts universal download
-        --organization https://dev.azure.com/MngEnvMCAP282378/
-        --feed AITeam
-        --name cmakesample
-        --version '1.0.*'
+        az artifacts universal download \
+        --organization https://dev.azure.com/MngEnvMCAP282378/ \
+        --feed AITeam \
+        --name cmakesample \
+        --version '1.0.*' \
         --path artifacts/.
 
         tree artifacts
