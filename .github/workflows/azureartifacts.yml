@@ -23,7 +23,7 @@ jobs:
 
     - run: |
         mkdir artifacts
-    name: 'Prepare Artifacts Folder'
+      name: 'Prepare Artifacts Folder'
     
     - run: |
         az artifacts universal download \
